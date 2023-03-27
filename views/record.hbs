@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>Record Audio</title>
+</head>
+
+<body>
+	<h1>Record Audio</h1>
+	<button id="record">Record</button>
+	<button id="stop">Stop</button>
+	<audio id="recording"></audio>
+	<script src="https://cdn.jsdelivr.net/npm/recordrtc/RecordRTC.js"></script>
+	<script>
+		var recordButton = document.getElementById('record');
+		var stopButton = document.getElementById('stop');
+		var recording = document.getElementById('recording');
+		var recorder;
+
+		navigator.mediaDevices.getUserMedia({ audio: true })
+			.then(function (stream) {
+				recorder = RecordRTC(stream, {
+					type: 'audio',
+					mimeType: 'audio/webm'
+				});
+			});
+
+		recordButton.addEventListener('click', function () {
+			recorder.startRecording();
+		});
+
+		stopButton.addEventListener('click', function () {
+			recorder.stopRecording(function () {
+				var blob = recorder.getBlob();
+				var url = URL.createObjectURL(blob);
+				recording.src = url;
+				var xhr = new XMLHttpRequest();
+				xhr.onreadystatechange = function () {
+					if (xhr.readyState === 4 && xhr.status === 200) {
+						console.log('Recording saved successfully.');
+					}
+				};
+				xhr.open('POST', '/record', true);
+				xhr.setRequestHeader('Content-Type', 'application/octet-stream');
+				xhr.send(blob);
+			});
+		});
+	</script>
+</body>
+
+</html>

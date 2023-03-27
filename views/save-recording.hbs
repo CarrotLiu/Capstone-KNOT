@@ -1,0 +1,15 @@
+const express = require('express');
+const app = express();
+const fs = require('fs');
+
+app.post('/save-recording', function(req, res) {
+const writeStream = fs.createWriteStream('./recordings/recording.webm');
+req.pipe(writeStream);
+req.on('end', function() {
+res.sendStatus(200);
+});
+});
+
+app.listen(3000, function() {
+console.log('Server listening on port 3000.');
+});

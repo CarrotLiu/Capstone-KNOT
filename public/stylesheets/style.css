@@ -1,0 +1,76 @@
+body {
+  background-color: #EBE5D9;
+	padding: 50px;
+  font: 18px "nzgrKangxi", Helvetica, Arial, sans-serif;
+}
+
+.title {
+	
+	font: "nzgrKangxi", "Dream Han Sans CN", Arial, sans-serif;
+	font-size: 5vw;
+}
+.button {
+	font: 35px "nzgrKangxi", "Dream Han Sans CN", Arial, sans-serif;
+}
+
+a {
+  color: #C3473D;
+}
+
+
+.form-row {
+	padding:0.5em;
+}
+
+form {
+	margin:1em;
+	/* margin-bottom:1em; */
+}
+
+#wrapper {
+	width:500px;
+	padding:2em;
+  	background-color:#EBE5D9;
+}
+
+#grocery-list {
+	background-color:#EBE5D9;
+	padding: 1em;
+	margin: 1em;
+}
+
+#grocery-list li {
+	list-style-type: none;
+	padding-top:0.25em;
+	padding-bottom:0.25em;
+}
+
+#grocery-list li.checked {
+	text-decoration: line-through;
+	padding: 0.25em 0.25em 0.25em 1.5em;
+}
+
+.qty {
+	width: 3em;
+}
+
+input[type='checkbox'] {
+	margin: 1em;
+}
+
+input[type=submit] {
+	padding:5px 15px; 
+	background:#EBE5D9; 
+	border:0 none;
+	cursor:pointer;
+	font-size:1em;
+}
+
+input {
+	font-size:1em;
+}
+
+input[type=submit]:hover {
+	background-color: #363634;
+	color: #EBE5D9;
+}
