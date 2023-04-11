@@ -1,4 +1,8 @@
 const mongoose = require("mongoose"),
+  grid = require("gridfs-stream"),
+  multer = require("multer"),
+  upload = multer(),
+  bucket = new GridFSBucket(db),
   URLSlugs = require("mongoose-url-slugs"),
   passportLocalMongoose = require("passport-local-mongoose");
 
@@ -22,9 +26,9 @@ const Item = new mongoose.Schema(
 
 const Record = new mongoose.Schema(
   {
-    creator: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
-    createdAt: { type: Date, required: true },
-    file: { type: Boolean, default: false, required: true },
+    name: { type: String, required: true },
+    data: { type: Buffer, required: true },
+    mimeType: { type: String, required: true },
   },
   {
     _id: true,

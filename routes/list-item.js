@@ -2,7 +2,8 @@ const express = require("express"),
   router = express.Router(),
   mongoose = require("mongoose"),
   List = mongoose.model("List"),
-  Item = mongoose.model("Item");
+  Item = mongoose.model("Item"),
+  Record = mongoose.model("Record");
 
 router.post("/create", (req, res) => {
   const { listSlug, name, quantity } = req.body;
@@ -36,5 +37,21 @@ router.post("/check", (req, res) => {
     });
   });
 });
+router.post("/saveRecord", function (req, res) {
+  const blobData = req.body;
+  console.log("Received blob data:", blobData);
 
+  // Save the blob data to MongoDB
+  const db = client.db();
+  const collection = db.collection("recordings");
+  collection.insertOne({ data: blobData }, (err, result) => {
+    if (err) {
+      console.error("Failed to save recording to MongoDB:", err);
+      res.status(500).send("Failed to save recording");
+    } else {
+      console.log("Recording saved to MongoDB");
+      res.send("Recording saved");
+    }
+  });
+});
 module.exports = router;

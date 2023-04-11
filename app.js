@@ -5,20 +5,20 @@ const passport = require("passport");
 const express = require("express");
 const path = require("path");
 
+// 创建routes实例
 const routes = require("./routes/index");
 const list = require("./routes/list");
 const listItem = require("./routes/list-item");
 
 const app = express();
 
-// view engine setup
-// app.set('views', path.join(__dirname, 'views'));
+// view engine setup (express需要渲染器才能渲染页面！)
 app.set("view engine", "hbs");
 
 // enable sessions
 const session = require("express-session");
 const sessionOptions = {
-  secret: "secret cookie thang (store this elsewhere!)",
+  secret: "knottt",
   resave: true,
   saveUninitialized: true,
 };
@@ -37,8 +37,10 @@ app.use((req, res, next) => {
   next();
 });
 
+//
 app.use("/", routes);
 app.use("/list", list);
 app.use("/list-item", listItem);
 
+// 在端口3000监听
 app.listen(3000);

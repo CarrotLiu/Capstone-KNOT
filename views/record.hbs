@@ -7,9 +7,9 @@
 </head>
 
 <body>
-	<h1>Record Audio</h1>
-	<button id="record">Record</button>
-	<button id="stop">Stop</button>
+	<h1>为  录音</h1>
+	<button id="record">开始录音</button>
+	<button id="stop">结束录音</button>
 	<audio id="recording"></audio>
 	<script src="https://cdn.jsdelivr.net/npm/recordrtc/RecordRTC.js"></script>
 	<script>
@@ -40,11 +40,14 @@
 		// Stop Recording
 		stopButton.addEventListener('click', function () {
 			recorder.stopRecording(function () {
+
 				//get recording data
 				var blob = recorder.getBlob();
+
 				//generate url for the recording data
 				var url = URL.createObjectURL(blob);
 				recording.src = url;
+
 				//send the file data to server
 				var xhr = new XMLHttpRequest();
 				xhr.onreadystatechange = function () {
@@ -52,10 +55,13 @@
 						console.log('Recording saved successfully.');
 					}
 				};
-				//specify the type of request as POST, the server location as url, the async as true
-				xhr.open('POST', '/record', true);
 				
+				//specify the type of request as POST, the server location as url, the async as true
+				xhr.open('POST', '/saveRecord', true);
+
 				xhr.setRequestHeader('Content-Type', 'application/octet-stream');
+
+				// send the request to the server for POST
 				xhr.send(blob);
 			});
 		});
