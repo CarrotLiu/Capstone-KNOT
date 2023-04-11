@@ -17,31 +17,44 @@
 		var stopButton = document.getElementById('stop');
 		var recording = document.getElementById('recording');
 		var recorder;
-
+		
+		//Configuration for stereoAudioRecorder 
 		navigator.mediaDevices.getUserMedia({ audio: true })
 			.then(function (stream) {
 				recorder = RecordRTC(stream, {
 					type: 'audio',
-					mimeType: 'audio/webm'
+					mimeType: 'audio/webm',
+					
+					sampleRate: 96000,
+					desiredSampRate: 16000,
+					bufferSize: 16384,
+					numberOfAudioChannels: 2
 				});
 			});
 
+		// Start Recording
 		recordButton.addEventListener('click', function () {
 			recorder.startRecording();
 		});
 
+		// Stop Recording
 		stopButton.addEventListener('click', function () {
 			recorder.stopRecording(function () {
+				//get recording data
 				var blob = recorder.getBlob();
+				//generate url for the recording data
 				var url = URL.createObjectURL(blob);
 				recording.src = url;
+				//send the file data to server
 				var xhr = new XMLHttpRequest();
 				xhr.onreadystatechange = function () {
 					if (xhr.readyState === 4 && xhr.status === 200) {
 						console.log('Recording saved successfully.');
 					}
 				};
+				//specify the type of request as POST, the server location as url, the async as true
 				xhr.open('POST', '/record', true);
+				
 				xhr.setRequestHeader('Content-Type', 'application/octet-stream');
 				xhr.send(blob);
 			});
