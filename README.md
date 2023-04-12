@@ -6,6 +6,8 @@ KNOT 结, a web application, is the digital component of my capstone "KNOT 结".
 
 ## Mock Ups
 
+![Homepage Design](https://github.com/CarrotLiu/Capstone-KNOT/blob/main/public/mock_ups/homepage.png)
+
 ## Data Model
 
 The application will store Users, Friend (List), and Recording
