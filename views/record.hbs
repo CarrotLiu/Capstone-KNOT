@@ -57,10 +57,10 @@
 				};
 				
 				//specify the type of request as POST, the server location as url, the async as true
-				xhr.open('POST', '/saveRecord', true);
+				xhr.open('POST', '/saveRecord', true); 
 
 				xhr.setRequestHeader('Content-Type', 'application/octet-stream');
-
+				
 				// send the request to the server for POST
 				xhr.send(blob);
 			});

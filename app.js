@@ -26,7 +26,8 @@ app.use(session(sessionOptions));
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
-app.use(express.static("assets"));
+console.log(__dirname);
+// app.use("/assets", express.static(path.join(__dirname, "/assets")));
 
 // passport setup
 app.use(passport.initialize());
