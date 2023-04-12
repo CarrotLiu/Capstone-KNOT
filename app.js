@@ -25,6 +25,7 @@ const sessionOptions = {
 app.use(session(sessionOptions));
 
 app.use(express.urlencoded({ extended: false }));
+
 app.use(express.static(path.join(__dirname, "public")));
 console.log(__dirname);
 // app.use("/assets", express.static(path.join(__dirname, "/assets")));

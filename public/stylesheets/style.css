@@ -1,13 +1,13 @@
 body {
   background-color: #EBE5D9;
 	padding: 50px;
-  font: 18px "HYJiangNanKaiSong", Helvetica, Arial, sans-serif;
+  font: 18px "HYJiangNanKaiSong", "Dream Han Sans CN", Helvetica, Arial, sans-serif;
 }
 
 .title {
-	
-	font: "HYJiangNanKaiSong", "Dream Han Sans CN", Arial, sans-serif;
-	font-size: 5vw;
+	font: "nzgrKangxi", "Dream Han Sans CN", Helvetica, Arial, sans-serif;
+	color:#363634;
+	font-size: 15vw;
 }
 .button {
 	font: 35px "HYJiangNanKaiSong", "Dream Han Sans CN", Arial, sans-serif;
@@ -54,6 +54,11 @@ form {
 	width: 3em;
 }
 
+/* login page */
+.login_btn_container{
+	margin-left: 50px;
+}
+
 .logo {
 	align-items: center;
 	/* position: relative; */
@@ -71,11 +76,11 @@ form {
 }
 
 .greeting{
-	font-weight: 400;
+	font-size: 3vw;
 	position: relative;
-	text-align: center;
-	padding: 8px 2px;
+	text-align: left;
 	margin-bottom: 10px;
+	color: #363634;
 }
 
 
