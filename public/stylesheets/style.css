@@ -54,6 +54,31 @@ form {
 	width: 3em;
 }
 
+.logo {
+	align-items: center;
+	/* position: relative; */
+	/* display:flex; */
+	margin-left: 56px;
+	min-width: 30%;
+	max-width: 50%;
+}
+
+.container{
+	height: 237px;
+	margin-right: -7px;
+	position: relative;
+	width: 365px;
+}
+
+.greeting{
+	font-weight: 400;
+	position: relative;
+	text-align: center;
+	padding: 8px 2px;
+	margin-bottom: 10px;
+}
+
+
 input[type='checkbox'] {
 	margin: 1em;
 }
