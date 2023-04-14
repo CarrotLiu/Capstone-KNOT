@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>Record Audio</title>
+</head>
+
+<body>
+	<h1>为  录音</h1>
+	<button id="record">开始录音</button>
+	<audio id="recording"></audio>
+	<script>
+		var promise = navigator.mediaDevices.getUserMedia(constraints);
+			if (navigator.mediaDevices.getUserMedia) {
+				const constraints = { audio: true };
+				navigator.mediaDevices.getUserMedia(constraints).then(
+					stream => {
+						console.log("授权成功！");
+					},
+					() => {
+						console.error("授权失败！");
+					}
+				);
+			} else {
+				console.error("浏览器不支持 getUserMedia");
+			}
+			var mediaRecorder = new MediaRecorder(stream);
+			const recordBtn = document.querySelector("#record");
+			
+			recordBtn.onclick = () => {
+				mediaRecorder.start();
+				console.log("录音中...");
+			};
+			recordBtn.onclick = () => {
+				if (mediaRecorder.state === "recording") {
+					mediaRecorder.stop();
+					recordBtn.textContent = "record";
+					console.log("录音结束");
+				} else {
+					mediaRecorder.start();
+					console.log("录音中...");
+					recordBtn.textContent = "stop";
+				}
+				console.log("录音器状态：", mediaRecorder.state);
+			};
+			const chunks = [];
+			mediaRecorder.ondataavailable = function (e) {
+				chunks.push(e.data);
+			};
+			mediaRecorder.onstop = e => {
+				var blob = new Blob(chunks, { type: "audio/ogg; codecs=opus" });
+				chunks = [];
+				var audioURL = window.URL.createObjectURL(blob);
+				audio.src = audioURL;
+			};
+
+	</script>
+</body>
+
+</html>

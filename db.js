@@ -1,10 +1,34 @@
 const mongoose = require("mongoose"),
   grid = require("gridfs-stream"),
+  // GridFS = grid(mongoose.connection.db, mongoose.mongo),
+  conn = mongoose.connection,
+  fs = require("fs"),
   multer = require("multer"),
   upload = multer(),
-  bucket = new GridFSBucket(db),
+  // GridFSBucket = require("mongodb"),
   URLSlugs = require("mongoose-url-slugs"),
   passportLocalMongoose = require("passport-local-mongoose");
+// grid.mongo = mongoose.mongo;
+// conn.once("open", function () {
+//   console.log("open");
+
+//   var gfs = grid(conn.db);
+
+//   // streaming to gridfs
+
+//   //filename to store in mongodb
+
+//   var writestream = gfs.createWriteStream({
+//     filename: "recording.mp3",
+//   });
+//   fs.createReadStream("/assets/recordings/recording.mp3").pipe(writestream);
+
+//   writestream.on("close", function (file) {
+//     // do something with \`file\`
+
+//     console.log(file.filename + "Written To DB");
+//   });
+// });
 
 // test.items.renameCollection("records");
 

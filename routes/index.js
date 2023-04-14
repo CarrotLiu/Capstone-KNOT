@@ -6,6 +6,8 @@ const express = require("express"),
   List = mongoose.model("List"),
   Item = mongoose.model("Item"),
   Record = mongoose.model("Record"),
+  multer = require("multer"),
+  upload = multer(),
   fs = require("fs");
 
 router.get("/logout", (req, res) => {
@@ -27,6 +29,10 @@ router.get("/register", (req, res) => {
 
 router.get("/record", (req, res) => {
   res.render("record");
+});
+
+router.get("/record-copy", (req, res) => {
+  res.render("record-copy");
 });
 
 router.post("/register", (req, res) => {
@@ -56,23 +62,35 @@ router.post("/login", (req, res, next) => {
   })(req, res, next);
 });
 
-router.post("/saveRecord", upload.single("Record"), (req, res) => {
-  const recordingData = req.file.buffer;
-  console.log(recordingData);
-  // Save the blob data to MongoDB
-  const recording = new Record({
-    name: "recording.webm",
-    data: recordingData,
-    mimeType: "audio/webm",
+router.post("/saveRecord", upload.any(), (req, res) => {
+  fs.writeFile(req.files[0].originalname, req.files[0].buffer, (err) => {
+    if (err) {
+      console.log("Error: ", err);
+      res.status(500).send("An error occurred: " + err.message);
+    } else {
+      res.status(200).send("ok");
+    }
   });
-  try {
-    await recording.save();
-    console.log("Recording saved to MongoDB");
-    res.send("Recording saved");
-  } catch (err) {
-    console.error("Failed to save recording:", err);
-    res.status(500).send("Failed to save recording");
-  }
 });
+
+// router.post("/saveRecord", upload.single("Record"), async (req, res) => {
+//   console.log("here");
+//   const recordingData = req.file.buffer;
+//   console.log(recordingData);
+//   // Save the blob data to MongoDB
+//   const recording = new Record({
+//     name: "recording.webm",
+//     data: recordingData,
+//     mimeType: "audio/webm",
+//   });
+//   try {
+//     await recording.save();
+//     console.log("Recording saved to MongoDB");
+//     res.send("Recording saved");
+//   } catch (err) {
+//     console.error("Failed to save recording:", err);
+//     res.status(500).send("Failed to save recording");
+//   }
+// });
 
 module.exports = router;
