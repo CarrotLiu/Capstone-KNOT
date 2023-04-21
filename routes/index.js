@@ -12,11 +12,16 @@ const express = require("express"),
 
 router.get("/logout", (req, res) => {
   req.logout();
-  res.redirect("/");
+
+  res.redirect("/loginPage");
 });
 
 router.get("/", (req, res) => {
   res.render("home");
+});
+
+router.get("/loginPage", (req, res) => {
+  res.render("loginPage");
 });
 
 router.get("/login", (req, res) => {

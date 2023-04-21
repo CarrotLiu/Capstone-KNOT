@@ -10,7 +10,10 @@ body {
 	font-size: 15vw;
 }
 .button {
-	font: 35px "HYJiangNanKaiSong", "Dream Han Sans CN", Arial, sans-serif;
+	left: 50%;
+	cursor: pointer;
+	border: none;
+	background-color: transparent;
 }
 
 a {
