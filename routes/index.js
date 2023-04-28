@@ -12,16 +12,21 @@ const express = require("express"),
 
 router.get("/logout", (req, res) => {
   req.logout();
-
-  res.redirect("/loginPage");
+  res.redirect("/");
 });
 
-router.get("/", (req, res) => {
+router.get("/home", (req, res) => {
   res.render("home");
 });
 
-router.get("/loginPage", (req, res) => {
-  res.render("loginPage");
+router.get("/", (req, res) => {
+  console.log(req.user);
+  if (req.user) {
+    console.log("already login!");
+    res.redirect("home");
+  } else {
+    res.render("loginPage");
+  }
 });
 
 router.get("/login", (req, res) => {
@@ -34,10 +39,6 @@ router.get("/register", (req, res) => {
 
 router.get("/record", (req, res) => {
   res.render("record");
-});
-
-router.get("/record-copy", (req, res) => {
-  res.render("record-copy");
 });
 
 router.post("/register", (req, res) => {

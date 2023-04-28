@@ -1,8 +1,10 @@
 {{#if user}}
-{{else}}
-<div class="login_btn_container">
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/login" class="button"><img src="/assets/buttons/login_btn.svg" alt="login_btn"></a>
-<br>
-<a href="/register" class="button"><img src="/assets/buttons/register_btn.svg" alt="register_btn"></a>
+<div class="greeting">
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 你好！<br />{{user.username}}
 </div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a
+    href="/list/" class="button"><img src="/assets/buttons/myKnot_btn.svg" alt="myKnot_btn"></a>
+<br>
+<a href="/list/create" class="button"><img src="/assets/buttons/newKnot_btn.svg" alt="newKnot_btn"></a>
+
 {{/if}}

@@ -9,17 +9,12 @@
 	</head>
 	<body>
 		<div id="wrapper">
-			<div id="header_container">
-				<img src="/assets/Logo_CN_Login_Page.svg" class="logoHome" alt="KnotLogo" />
-				<h1 class="titleHome">结</h1>
-			</div>
 			<div id="bd">
 				{{{body}}}
 			</div>
 			<div id="ft">
-				{{#if user}}
-					(<a href="/logout">登<br>出</a>)
-				{{/if}}
+				<a href="/loginPage" class="button">首<br>页</a>
+				(<a href="/logout">登出</a>)
 			</div>
 		</div>
 	</body>
