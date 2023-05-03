@@ -1,13 +1,14 @@
 const express = require("express"),
   router = express.Router(),
   passport = require("passport"),
-  mongoose = require("mongoose"),
-  User = mongoose.model("User"),
-  List = mongoose.model("List"),
-  Item = mongoose.model("Item"),
-  Record = mongoose.model("Record"),
+  // mongoose = require("mongoose"),
+  // User = mongoose.model("User"),
+  // List = mongoose.model("List"),
+  // Item = mongoose.model("Item"),
+  // Record = mongoose.model("Record"),
   multer = require("multer"),
   upload = multer(),
+  data = require("../data.json"),
   fs = require("fs");
 
 router.get("/logout", (req, res) => {
@@ -16,7 +17,7 @@ router.get("/logout", (req, res) => {
 });
 
 router.get("/home", (req, res) => {
-  res.render("home");
+  res.render("home", { layout: "layoutRegister" });
 });
 
 router.get("/", (req, res) => {
@@ -30,30 +31,49 @@ router.get("/", (req, res) => {
 });
 
 router.get("/login", (req, res) => {
-  res.render("login");
+  res.render("login", { layout: "layoutRegister" });
 });
 
 router.get("/register", (req, res) => {
-  res.render("register");
+  res.render("register", { layout: "layoutRegister" });
 });
 
 router.get("/record", (req, res) => {
-  res.render("record");
+  res.render("record", { layout: "layoutPage" });
 });
 
 router.post("/register", (req, res) => {
-  const { username, password } = req.body;
-  User.register(new User({ username }), req.body.password, (err, user) => {
-    if (err) {
-      res.render("register", {
-        message: "Your registration information is not valid",
-      });
-    } else {
-      passport.authenticate("local")(req, res, function () {
-        res.redirect("/");
-      });
+  // const { username, password } = req.body;
+  fs.writeFile(
+    "../data.json",
+    JSON.stringify({
+      username: req.body.username,
+      password: req.body.password,
+    }),
+    (err) => {
+      if (err) {
+        res.render("register", {
+          message: "Your registration information is not valid",
+        });
+        return;
+      } else {
+        passport.authenticate("local")(req, res, function () {
+          res.redirect("/");
+        });
+      }
     }
-  });
+  );
+  // User.register(new User({ username }), req.body.password, (err, user) => {
+  //   if (err) {
+  //     res.render("register", {
+  //       message: "Your registration information is not valid",
+  //     });
+  //   } else {
+  //     passport.authenticate("local")(req, res, function () {
+  //       res.redirect("/");
+  //     });
+  //   }
+  // });
 });
 
 router.post("/login", (req, res, next) => {
@@ -78,25 +98,5 @@ router.post("/saveRecord", upload.any(), (req, res) => {
     }
   });
 });
-
-// router.post("/saveRecord", upload.single("Record"), async (req, res) => {
-//   console.log("here");
-//   const recordingData = req.file.buffer;
-//   console.log(recordingData);
-//   // Save the blob data to MongoDB
-//   const recording = new Record({
-//     name: "recording.webm",
-//     data: recordingData,
-//     mimeType: "audio/webm",
-//   });
-//   try {
-//     await recording.save();
-//     console.log("Recording saved to MongoDB");
-//     res.send("Recording saved");
-//   } catch (err) {
-//     console.error("Failed to save recording:", err);
-//     res.status(500).send("Failed to save recording");
-//   }
-// });
 
 module.exports = router;

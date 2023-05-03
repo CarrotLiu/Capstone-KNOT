@@ -2,7 +2,7 @@ body {
   	background-color: #EBE5D9;
 	padding: 6% 1%;
   	font: 18px "HYJiangNanKaiSong", "Dream Han Sans CN", Helvetica, Arial, sans-serif;
-
+	overflow: hidden;
 }
 
 /* titles */
@@ -24,6 +24,12 @@ body {
 }
 
 .titlePage {
+	color: #363634;
+	font-size: 9vw;
+	display: inline-block;
+	left:50%;
+	padding:0px;
+	margin:0px;
 
 }
 
@@ -41,14 +47,22 @@ body {
 
 .logoPage {
 	position: absolute;
-	top: -175px;
-	max-width: 100%;
-
+	top: -50px;
+	min-width: 10%;
+	max-width: 46%;
+	margin-left: -10px;
 }
 
 /* forms */
+.login-form{
+	position: absolute;
+	top: 200px;
+	padding: 6px;
+
+}
+
 .form-row {
-	padding: 0.5em;
+	padding: 0.3em;
 }
 
 form {
@@ -60,18 +74,20 @@ input[type='checkbox'] {
 	margin: 1em;
 }
 
-input[type=submit] {
-	padding: 5px 15px;
+/* input[type=submit] {
+	background: url("/assets/buttons/login_btn.svg");
 	background: none;
 	border: 0 none;
-	cursor: pointer;
-	font-size: 1em;
-}
+} */
+/* input[type="submit"] {
+	display: none;
+} */
 
 input {
 	font-size: 1.5em;
 	background: none;
 	border: none;
+	background-image: url('/assets/input/text_input.svg');
 }
 
 input[type=submit]:hover {
@@ -86,6 +102,12 @@ input[type=submit]:hover {
 	border: none;
 	background-color: transparent;
 }
+
+.submitBtn{
+	background: none;
+	border: none;
+}
+
 .recordBtn {}
 
 .redoBtn {}
@@ -141,7 +163,7 @@ a:link {
 }
 
 .time{
-
+	
 }
 
 .date{
@@ -162,6 +184,12 @@ a:link {
 	/* margin: -50px 0 0 -50px; */
 
 }
+.body_container{
+	position: absolute;
+	top:236px;
+	left:20%;
+	padding:10px;
+}
 
 /* login page */
 .login_page_container {
@@ -179,6 +207,7 @@ a:link {
 	left: 29%;
 }
 
+
 /* Register Page */
 .login_btn_container {
 	position: absolute;
@@ -188,9 +217,17 @@ a:link {
 }
 
 #greeting {
-	font-size: 3vw;
-	position: relative;
+	font-size: 32px;
+	position: absolute;
+	top: 120px;
+	left: 42%;
 	text-align: left;
 	margin-bottom: 10px;
 	color: #363634;
+}
+
+#ft{
+	position: absolute;
+	left:8px;
+	bottom:30px;
 }

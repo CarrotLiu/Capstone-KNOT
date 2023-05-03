@@ -1,5 +1,6 @@
-require("./db");
+// require("./db");
 require("./auth");
+data = require("./data.json");
 
 const passport = require("passport");
 const express = require("express");
@@ -7,8 +8,8 @@ const path = require("path");
 
 // 创建routes实例
 const routes = require("./routes/index");
-const list = require("./routes/list");
-const listItem = require("./routes/list-item");
+// const list = require("./routes/list");
+// const listItem = require("./routes/list-item");
 
 const app = express();
 
@@ -42,8 +43,8 @@ app.use((req, res, next) => {
 
 //
 app.use("/", routes);
-app.use("/list", list);
-app.use("/list-item", listItem);
+// app.use("/list", list);
+// app.use("/list-item", listItem);
 
 // 在端口3000监听
 app.listen(3000);

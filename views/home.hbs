@@ -1,10 +1,12 @@
 {{#if user}}
-<div class="greeting">
+<div id="greeting">
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 你好！<br />{{user.username}}
 </div>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a
-    href="/list/" class="button"><img src="/assets/buttons/myKnot_btn.svg" alt="myKnot_btn"></a>
-<br>
-<a href="/list/create" class="button"><img src="/assets/buttons/newKnot_btn.svg" alt="newKnot_btn"></a>
-
+<div class="body_container">
+    
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a
+        href="/list/" class="button"><img src="/assets/buttons/myKnot_btn.svg" alt="myKnot_btn"></a>
+    <br>
+    <a href="/list/create" class="button"><img src="/assets/buttons/newKnot_btn.svg" alt="newKnot_btn"></a>
+</div>
 {{/if}}

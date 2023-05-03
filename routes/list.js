@@ -18,13 +18,13 @@ router.get("/", (req, res) => {
   List.find(
     { user: req.user ? req.user._id : undefined },
     (err, lists, count) => {
-      res.render("list-all.hbs", { lists: lists });
+      res.render("list-all.hbs", { lists: lists, layout: "layoutPage.hbs" });
     }
   );
 });
 
 router.get("/create", (req, res) => {
-  res.render("list-create.hbs");
+  res.render("list-create.hbs", { layout: "layoutRegister.hbs" });
 });
 
 router.post("/create", (req, res) => {
@@ -44,6 +44,7 @@ router.get("/:slug", (req, res) => {
     res.render("list-slug.hbs", {
       list,
       displayListItems: list.items.length >= 1,
+      layout: "layoutPage.hbs",
     });
   });
 });
