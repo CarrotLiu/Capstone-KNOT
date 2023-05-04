@@ -5,6 +5,7 @@ data = require("./data.json");
 const passport = require("passport");
 const express = require("express");
 const path = require("path");
+const bodyParser = require("body-parser");
 
 // 创建routes实例
 const routes = require("./routes/index");
@@ -26,6 +27,8 @@ const sessionOptions = {
 app.use(session(sessionOptions));
 
 app.use(express.urlencoded({ extended: false }));
+
+app.use(bodyParser.json());
 
 app.use(express.static(path.join(__dirname, "public")));
 console.log(__dirname);

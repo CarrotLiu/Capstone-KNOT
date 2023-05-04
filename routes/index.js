@@ -7,6 +7,7 @@ const express = require("express"),
   // Item = mongoose.model("Item"),
   // Record = mongoose.model("Record"),
   multer = require("multer"),
+  bodyParser = require("body-parser"),
   upload = multer(),
   data = require("../data.json"),
   fs = require("fs");
@@ -43,12 +44,15 @@ router.get("/record", (req, res) => {
 });
 
 router.post("/register", (req, res) => {
-  // const { username, password } = req.body;
+  // const { username, password } = req.body
+  const userInfo = {
+    username: req.body.username,
+    password: req.body.password,
+  };
   fs.writeFile(
     "../data.json",
     JSON.stringify({
-      username: req.body.username,
-      password: req.body.password,
+      userInfo,
     }),
     (err) => {
       if (err) {
@@ -57,7 +61,7 @@ router.post("/register", (req, res) => {
         });
         return;
       } else {
-        passport.authenticate("local")(req, res, function () {
+        passport.authenticate("json")(req, res, function () {
           res.redirect("/");
         });
       }
