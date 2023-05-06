@@ -9,7 +9,7 @@ const express = require("express"),
   multer = require("multer"),
   bodyParser = require("body-parser"),
   upload = multer(),
-  data = require("../data.json"),
+  data = require("../JSdata.json"),
   fs = require("fs");
 
 router.get("/logout", (req, res) => {
@@ -43,42 +43,54 @@ router.get("/record", (req, res) => {
   res.render("record", { layout: "layoutPage" });
 });
 
-router.post("/register", (req, res) => {
-  // const { username, password } = req.body
-  const userInfo = {
-    username: req.body.username,
-    password: req.body.password,
-  };
-  fs.writeFile(
-    "../data.json",
-    JSON.stringify({
-      userInfo,
-    }),
-    (err) => {
-      if (err) {
-        res.render("register", {
-          message: "Your registration information is not valid",
-        });
-        return;
-      } else {
-        passport.authenticate("json")(req, res, function () {
-          res.redirect("/");
-        });
-      }
-    }
-  );
-  // User.register(new User({ username }), req.body.password, (err, user) => {
-  //   if (err) {
-  //     res.render("register", {
-  //       message: "Your registration information is not valid",
-  //     });
-  //   } else {
-  //     passport.authenticate("local")(req, res, function () {
-  //       res.redirect("/");
-  //     });
-  //   }
-  // });
-});
+// router.post("/register", (req, res) => {
+//   console.log("register", req.body);
+//   // const { username, password } = req.body
+//   const userInfo = {
+//     username: req.body.username,
+//     password: req.body.password,
+//   };
+//   console.log(userInfo);
+//   fs.writeFile(
+//     "./JSdata.json",
+//     JSON.stringify({
+//       userInfo,
+//     }),
+//     (err) => {
+//       console.log("hhhhhhhhhh", err);
+//       if (err) {
+//         res.render("register", {
+//           message: "Your registration information is not valid",
+//         });
+//         return;
+//       } else {
+//         console.log(passport.authenticate("local")(req, res));
+//       }
+//     }
+//   );
+//   // User.register(new User({ username }), req.body.password, (err, user) => {
+//   //   if (err) {
+//   //     res.render("register", {
+//   //       message: "Your registration information is not valid",
+//   //     });
+//   //   } else {
+//   //     passport.authenticate("local")(req, res, function () {
+//   //       res.redirect("/");
+//   //     });
+//   //   }
+//   // });
+// });
+router.post(
+  "/register",
+  passport.authenticate("local", {
+    failureRedirect: "/",
+    failureMessage: true,
+  }),
+  function (req, res) {
+    console.log("register");
+    res.redirect("/~" + req.user.username);
+  }
+);
 
 router.post("/login", (req, res, next) => {
   passport.authenticate("local", (err, user) => {

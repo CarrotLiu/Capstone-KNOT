@@ -1,6 +1,6 @@
 // require("./db");
 require("./auth");
-data = require("./data.json");
+data = require("./JSdata.json");
 
 const passport = require("passport");
 const express = require("express");
